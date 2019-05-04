@@ -1,0 +1,2686 @@
+
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
+
+
+public class MyFirebaseManager {
+
+        public ArrayList<EntryClass> getEntryArray() {
+                return entryArray;
+        }
+
+        ArrayList<EntryClass> entryArray;
+        String tableName;
+        String field1Match;
+        DatabaseReference firebaseRef;
+        int isGetWholeTableToArrayList;
+
+        long dataCount = 0;
+        long countYet;
+        ArrayList<String> AllfieldsArray;
+        MyFirebaseManager myFirebaseManager;
+        SQLiteDatabase sqLiteDatabase;
+
+    public EntryClass myEntryClass;
+
+    MyFirebaseManager() { };
+
+    public void setTable(String tableName){
+        this.tableName = tableName;
+        firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);
+    }
+
+    public void postEntry(EntryClass myEntryClass) {
+
+
+        this.myEntryClass = myEntryClass;
+        firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);
+
+        //String mKey = firebaseRef.push().getKey();
+
+        firebaseRef.child(myEntryClass.getField1Data()).setValue(myEntryClass);
+
+    }
+
+
+    public static class EntryClass {
+
+        EntryClass() {
+        }
+
+        String field1Data;
+        String field2Data;
+        String field3Data;
+        String field4Data;
+        String field5Data;
+        String field6Data;
+        String field7Data;
+        String field8Data;
+        String field9Data;
+        String field10Data;
+        String field11Data;
+        String field12Data;
+        String field13Data;
+        String field14Data;
+        String field15Data;
+        String field16Data;
+        String field17Data;
+        String field18Data;
+        String field19Data;
+        String field20Data;
+        String field21Data;
+        String field22Data;
+        String field23Data;
+        String field24Data;
+        String field25Data;
+        String field26Data;
+        String field27Data;
+        String field28Data;
+        String field29Data;
+        String field30Data;
+        String field31Data;
+        String field32Data;
+        String field33Data;
+        String field34Data;
+        String field35Data;
+        String field36Data;
+        String field37Data;
+        String field39Data;
+        String field40Data;
+        String field41Data;
+        String field42Data;
+        String field43Data;
+        String field44Data;
+        String field45Data;
+        String field46Data;
+
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data, String field40Data, String field41Data, String field42Data, String field43Data, String field44Data, String field45Data, String field46Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+            this.field40Data = field40Data;
+            this.field41Data = field41Data;
+            this.field42Data = field42Data;
+            this.field43Data = field43Data;
+            this.field44Data = field44Data;
+            this.field45Data = field45Data;
+            this.field46Data = field46Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data, String field40Data, String field41Data, String field42Data, String field43Data, String field44Data, String field45Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+            this.field40Data = field40Data;
+            this.field41Data = field41Data;
+            this.field42Data = field42Data;
+            this.field43Data = field43Data;
+            this.field44Data = field44Data;
+            this.field45Data = field45Data;
+        }
+
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data, String field40Data, String field41Data, String field42Data, String field43Data, String field44Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+            this.field40Data = field40Data;
+            this.field41Data = field41Data;
+            this.field42Data = field42Data;
+            this.field43Data = field43Data;
+            this.field44Data = field44Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data, String field40Data, String field41Data, String field42Data, String field43Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+            this.field40Data = field40Data;
+            this.field41Data = field41Data;
+            this.field42Data = field42Data;
+            this.field43Data = field43Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data, String field40Data, String field41Data, String field42Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+            this.field40Data = field40Data;
+            this.field41Data = field41Data;
+            this.field42Data = field42Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data, String field40Data, String field41Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+            this.field40Data = field40Data;
+            this.field41Data = field41Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data, String field40Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+            this.field40Data = field40Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data, String field39Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+            this.field39Data = field39Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data, String field37Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+            this.field37Data = field37Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data, String field36Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+            this.field36Data = field36Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data, String field35Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+            this.field35Data = field35Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data, String field34Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+            this.field34Data = field34Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data, String field33Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+            this.field33Data = field33Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data, String field32Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+            this.field32Data = field32Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data, String field31Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+            this.field31Data = field31Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data, String field30Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+            this.field30Data = field30Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data, String field29Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+            this.field29Data = field29Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data, String field28Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+            this.field28Data = field28Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data, String field27Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+            this.field27Data = field27Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data, String field26Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+            this.field26Data = field26Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data, String field25Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+            this.field25Data = field25Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data, String field24Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+            this.field24Data = field24Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data, String field23Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+            this.field23Data = field23Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data, String field22Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+            this.field22Data = field22Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data, String field21Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+            this.field21Data = field21Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data, String field20Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+            this.field20Data = field20Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data, String field19Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+            this.field19Data = field19Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data, String field18Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+            this.field18Data = field18Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data, String field17Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+            this.field17Data = field17Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data, String field16Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+            this.field16Data = field16Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data, String field15Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+            this.field15Data = field15Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data, String field14Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+            this.field14Data = field14Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data, String field13Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+            this.field13Data = field13Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data, String field12Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+            this.field12Data = field12Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data, String field11Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+            this.field11Data = field11Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data, String field10Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+            this.field10Data = field10Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data, String field9Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+            this.field9Data = field9Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data, String field8Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+            this.field8Data = field8Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data, String field7Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+            this.field7Data = field7Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data, String field6Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+            this.field6Data = field6Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data, String field5Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+            this.field5Data = field5Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data, String field4Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+            this.field4Data = field4Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data, String field3Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+            this.field3Data = field3Data;
+        }
+
+    public EntryClass(String field1Data, String field2Data) {
+            this.field1Data = field1Data;
+            this.field2Data = field2Data;
+        }
+
+    public EntryClass(String field1Data) {
+            this.field1Data = field1Data;
+        }
+
+            public String getField1Data() {
+                    return field1Data;
+            }
+
+            public void setField1Data(String field1Data) {
+                    this.field1Data = field1Data;
+            }
+
+            public String getField2Data() {
+                    return field2Data;
+            }
+
+            public void setField2Data(String field2Data) {
+                    this.field2Data = field2Data;
+            }
+
+            public String getField3Data() {
+                    return field3Data;
+            }
+
+            public void setField3Data(String field3Data) {
+                    this.field3Data = field3Data;
+            }
+
+            public String getField4Data() {
+                    return field4Data;
+            }
+
+            public void setField4Data(String field4Data) {
+                    this.field4Data = field4Data;
+            }
+
+            public String getField5Data() {
+                    return field5Data;
+            }
+
+            public void setField5Data(String field5Data) {
+                    this.field5Data = field5Data;
+            }
+
+            public String getField6Data() {
+                    return field6Data;
+            }
+
+            public void setField6Data(String field6Data) {
+                    this.field6Data = field6Data;
+            }
+
+            public String getField7Data() {
+                    return field7Data;
+            }
+
+            public void setField7Data(String field7Data) {
+                    this.field7Data = field7Data;
+            }
+
+            public String getField8Data() {
+                    return field8Data;
+            }
+
+            public void setField8Data(String field8Data) {
+                    this.field8Data = field8Data;
+            }
+
+            public String getField9Data() {
+                    return field9Data;
+            }
+
+            public void setField9Data(String field9Data) {
+                    this.field9Data = field9Data;
+            }
+
+            public String getField10Data() {
+                    return field10Data;
+            }
+
+            public void setField10Data(String field10Data) {
+                    this.field10Data = field10Data;
+            }
+
+            public String getField11Data() {
+                    return field11Data;
+            }
+
+            public void setField11Data(String field11Data) {
+                    this.field11Data = field11Data;
+            }
+
+            public String getField12Data() {
+                    return field12Data;
+            }
+
+            public void setField12Data(String field12Data) {
+                    this.field12Data = field12Data;
+            }
+
+            public String getField13Data() {
+                    return field13Data;
+            }
+
+            public void setField13Data(String field13Data) {
+                    this.field13Data = field13Data;
+            }
+
+            public String getField14Data() {
+                    return field14Data;
+            }
+
+            public void setField14Data(String field14Data) {
+                    this.field14Data = field14Data;
+            }
+
+            public String getField15Data() {
+                    return field15Data;
+            }
+
+            public void setField15Data(String field15Data) {
+                    this.field15Data = field15Data;
+            }
+
+            public String getField16Data() {
+                    return field16Data;
+            }
+
+            public void setField16Data(String field16Data) {
+                    this.field16Data = field16Data;
+            }
+
+            public String getField17Data() {
+                    return field17Data;
+            }
+
+            public void setField17Data(String field17Data) {
+                    this.field17Data = field17Data;
+            }
+
+            public String getField18Data() {
+                    return field18Data;
+            }
+
+            public void setField18Data(String field18Data) {
+                    this.field18Data = field18Data;
+            }
+
+            public String getField19Data() {
+                    return field19Data;
+            }
+
+            public void setField19Data(String field19Data) {
+                    this.field19Data = field19Data;
+            }
+
+            public String getField20Data() {
+                    return field20Data;
+            }
+
+            public void setField20Data(String field20Data) {
+                    this.field20Data = field20Data;
+            }
+
+            public String getField21Data() {
+                    return field21Data;
+            }
+
+            public void setField21Data(String field21Data) {
+                    this.field21Data = field21Data;
+            }
+
+            public String getField22Data() {
+                    return field22Data;
+            }
+
+            public void setField22Data(String field22Data) {
+                    this.field22Data = field22Data;
+            }
+
+            public String getField23Data() {
+                    return field23Data;
+            }
+
+            public void setField23Data(String field23Data) {
+                    this.field23Data = field23Data;
+            }
+
+            public String getField24Data() {
+                    return field24Data;
+            }
+
+            public void setField24Data(String field24Data) {
+                    this.field24Data = field24Data;
+            }
+
+            public String getField25Data() {
+                    return field25Data;
+            }
+
+            public void setField25Data(String field25Data) {
+                    this.field25Data = field25Data;
+            }
+
+            public String getField26Data() {
+                    return field26Data;
+            }
+
+            public void setField26Data(String field26Data) {
+                    this.field26Data = field26Data;
+            }
+
+            public String getField27Data() {
+                    return field27Data;
+            }
+
+            public void setField27Data(String field27Data) {
+                    this.field27Data = field27Data;
+            }
+
+            public String getField28Data() {
+                    return field28Data;
+            }
+
+            public void setField28Data(String field28Data) {
+                    this.field28Data = field28Data;
+            }
+
+            public String getField29Data() {
+                    return field29Data;
+            }
+
+            public void setField29Data(String field29Data) {
+                    this.field29Data = field29Data;
+            }
+
+            public String getField30Data() {
+                    return field30Data;
+            }
+
+            public void setField30Data(String field30Data) {
+                    this.field30Data = field30Data;
+            }
+
+            public String getField31Data() {
+                    return field31Data;
+            }
+
+            public void setField31Data(String field31Data) {
+                    this.field31Data = field31Data;
+            }
+
+            public String getField32Data() {
+                    return field32Data;
+            }
+
+            public void setField32Data(String field32Data) {
+                    this.field32Data = field32Data;
+            }
+
+            public String getField33Data() {
+                    return field33Data;
+            }
+
+            public void setField33Data(String field33Data) {
+                    this.field33Data = field33Data;
+            }
+
+            public String getField34Data() {
+                    return field34Data;
+            }
+
+            public void setField34Data(String field34Data) {
+                    this.field34Data = field34Data;
+            }
+
+            public String getField35Data() {
+                    return field35Data;
+            }
+
+            public void setField35Data(String field35Data) {
+                    this.field35Data = field35Data;
+            }
+
+            public String getField36Data() {
+                    return field36Data;
+            }
+
+            public void setField36Data(String field36Data) {
+                    this.field36Data = field36Data;
+            }
+
+            public String getField37Data() {
+                    return field37Data;
+            }
+
+            public void setField37Data(String field37Data) {
+                    this.field37Data = field37Data;
+            }
+
+            public String getField39Data() {
+                    return field39Data;
+            }
+
+            public void setField39Data(String field39Data) {
+                    this.field39Data = field39Data;
+            }
+
+            public String getField40Data() {
+                    return field40Data;
+            }
+
+            public void setField40Data(String field40Data) {
+                    this.field40Data = field40Data;
+            }
+
+            public String getField41Data() {
+                    return field41Data;
+            }
+
+            public void setField41Data(String field41Data) {
+                    this.field41Data = field41Data;
+            }
+
+            public String getField42Data() {
+                    return field42Data;
+            }
+
+            public void setField42Data(String field42Data) {
+                    this.field42Data = field42Data;
+            }
+
+            public String getField43Data() {
+                    return field43Data;
+            }
+
+            public void setField43Data(String field43Data) {
+                    this.field43Data = field43Data;
+            }
+
+            public String getField44Data() {
+                    return field44Data;
+            }
+
+            public void setField44Data(String field44Data) {
+                    this.field44Data = field44Data;
+            }
+
+            public String getField45Data() {
+                    return field45Data;
+            }
+
+            public void setField45Data(String field45Data) {
+                    this.field45Data = field45Data;
+            }
+
+            public String getField46Data() {
+                    return field46Data;
+            }
+
+            public void setField46Data(String field46Data) {
+                    this.field46Data = field46Data;
+            }
+    }
+
+    public void removeTable(){
+
+            firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);
+            firebaseRef.removeValue();
+
+    }
+
+    public boolean saveExcelFile(Context context, String fileName, SQLiteDatabase mSqLiteDatabase, String sqlStatement, String[] fieldNames,String sheetName) {
+
+
+                // check if available and not read only
+
+                boolean success = false;
+
+                //New Workbook
+                Workbook wb = new HSSFWorkbook();
+
+
+                Cell c = null;
+
+                //Cell style for header row
+                CellStyle cs = wb.createCellStyle();
+                cs.setFillForegroundColor(HSSFColor.LIME.index);
+                cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+
+                //New Sheet
+                Sheet sheet1 = null;
+                sheet1 = wb.createSheet(sheetName);
+
+                //run Query in SQLite to retrieve data
+                Cursor mCursor = mSqLiteDatabase.rawQuery(sqlStatement,null);
+                mCursor.moveToFirst();
+
+
+                // Generate column headings
+                Row currentRow = sheet1.createRow(0);
+
+                File file = new File(context.getExternalFilesDir(DIRECTORY_DOWNLOADS), fileName);
+                FileOutputStream os = null;
+
+                currentRow = sheet1.createRow(0);
+
+                for(int counter = 0; counter < fieldNames.length;counter++){
+
+                        c = currentRow.createCell(counter);
+                        c.setCellValue(fieldNames[counter]);
+                }
+
+                mCursor.moveToFirst();
+
+                for (int counter = 0; counter<mCursor.getCount();counter++){
+
+
+                        currentRow = sheet1.createRow(counter+1);
+
+                        for (int subCounter = 0; subCounter < fieldNames.length;subCounter++){
+
+                                c = currentRow.createCell(subCounter);
+                                String cellDetail = mCursor.getString(mCursor.getColumnIndex(fieldNames[subCounter]));
+                                c.setCellValue(cellDetail);
+
+
+                        }
+
+                        if(counter + 1 < mCursor.getCount()){ mCursor.moveToNext();};
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*sheet1.setColumnWidth(0, (15 * 500));
+        sheet1.setColumnWidth(1, (15 * 500));
+        sheet1.setColumnWidth(2, (15 * 500));*/
+
+                // Create a path where we will place our List of objects on external storage
+
+
+                try {
+                        os = new FileOutputStream(file);
+                        wb.write(os);
+                        Log.w("FileUtils", "Writing file" + file);
+                        success = true;
+                } catch (IOException e) {
+                        Log.w("FileUtils", "Error writing " + file, e);
+                } catch (Exception e) {
+                        Log.w("FileUtils", "Failed to save file", e);
+                } finally {
+                        try {
+                                if (null != os)
+                                        os.close();
+                        } catch (Exception ex) {
+
+                        }
+                }
+
+
+                return success;
+        }
+
+
+
+
+
+
+
+        public void getWholeTableToNewSQLite(final String[] fieldNames, final Context context) {
+
+
+
+                isGetWholeTableToArrayList =1;
+                countYet=0;
+
+
+                sqLiteDatabase = context.openOrCreateDatabase(tableName,MODE_PRIVATE,null);
+
+                String fieldV = "";
+
+                fieldV ="" + fieldNames[0]+ " Varchar";
+
+                for (int counter=1;counter<fieldNames.length;counter++){
+
+                        fieldV = fieldV + ", " + fieldNames[counter] + " Varchar";
+
+                }
+
+                sqLiteDatabase.execSQL("DROP TABLE "+ tableName);
+
+                sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " (" +
+                        fieldV
+                        + ")");
+
+
+                firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);
+
+
+
+                AllfieldsArray = new ArrayList<>();
+
+
+                firebaseRef.addValueEventListener(new ValueEventListener() {
+
+                        String allFieldString;
+
+
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                if(isGetWholeTableToArrayList==1) {
+
+                                        dataCount = dataSnapshot.getChildrenCount();
+
+                                        String[] fieldStrings = new String[45];
+
+
+                                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                MyFirebaseManager.EntryClass mEntryClass = ds.getValue(MyFirebaseManager.EntryClass.class);
+                                                //Start Here
+
+
+                                                fieldStrings[0] = mEntryClass.getField1Data();
+                                                fieldStrings[1] = mEntryClass.getField2Data();
+                                                fieldStrings[2] = mEntryClass.getField3Data();
+                                                fieldStrings[3] = mEntryClass.getField4Data();
+                                                fieldStrings[4] = mEntryClass.getField5Data();
+                                                fieldStrings[5] = mEntryClass.getField6Data();
+                                                fieldStrings[6] = mEntryClass.getField7Data();
+                                                fieldStrings[7] = mEntryClass.getField8Data();
+                                                fieldStrings[8] = mEntryClass.getField9Data();
+                                                fieldStrings[9] = mEntryClass.getField10Data();
+                                                fieldStrings[10] = mEntryClass.getField11Data();
+                                                fieldStrings[11] = mEntryClass.getField12Data();
+                                                fieldStrings[12] = mEntryClass.getField13Data();
+                                                fieldStrings[13] = mEntryClass.getField14Data();
+                                                fieldStrings[14] = mEntryClass.getField15Data();
+                                                fieldStrings[15] = mEntryClass.getField16Data();
+                                                fieldStrings[16] = mEntryClass.getField17Data();
+                                                fieldStrings[17] = mEntryClass.getField18Data();
+                                                fieldStrings[18] = mEntryClass.getField19Data();
+                                                fieldStrings[19] = mEntryClass.getField20Data();
+                                                fieldStrings[20] = mEntryClass.getField21Data();
+                                                fieldStrings[21] = mEntryClass.getField22Data();
+                                                fieldStrings[22] = mEntryClass.getField23Data();
+                                                fieldStrings[23] = mEntryClass.getField24Data();
+                                                fieldStrings[24] = mEntryClass.getField25Data();
+                                                fieldStrings[25] = mEntryClass.getField26Data();
+                                                fieldStrings[26] = mEntryClass.getField27Data();
+                                                fieldStrings[27] = mEntryClass.getField28Data();
+                                                fieldStrings[28] = mEntryClass.getField29Data();
+                                                fieldStrings[29] = mEntryClass.getField30Data();
+                                                fieldStrings[30] = mEntryClass.getField31Data();
+                                                fieldStrings[31] = mEntryClass.getField32Data();
+                                                fieldStrings[32] = mEntryClass.getField33Data();
+                                                fieldStrings[33] = mEntryClass.getField34Data();
+                                                fieldStrings[34] = mEntryClass.getField35Data();
+                                                fieldStrings[35] = mEntryClass.getField36Data();
+                                                fieldStrings[36] = mEntryClass.getField37Data();
+                                                fieldStrings[37] = mEntryClass.getField39Data();
+                                                fieldStrings[38] = mEntryClass.getField40Data();
+                                                fieldStrings[39] = mEntryClass.getField41Data();
+                                                fieldStrings[40] = mEntryClass.getField42Data();
+                                                fieldStrings[41] = mEntryClass.getField43Data();
+                                                fieldStrings[42] = mEntryClass.getField44Data();
+                                                fieldStrings[43] = mEntryClass.getField45Data();
+                                                fieldStrings[44] = mEntryClass.getField46Data();
+
+                       /* allFieldString =
+
+                                field1String + "," +
+                                        field2String + "," +
+                                        field3String + "," +
+                                        field4String + "," +
+                                        field5String + "," +
+                                        field6String + "," +
+                                        field7String + "," +
+                                        field8String + "," +
+                                        field9String + "," +
+                                        field10String + "," +
+                                        field11String + "," +
+                                        field12String + "," +
+                                        field13String + "," +
+                                        field14String + "," +
+                                        field15String + "," +
+                                        field16String + "," +
+                                        field17String + "," +
+                                        field18String + "," +
+                                        field19String + "," +
+                                        field20String + "," +
+                                        field21String + "," +
+                                        field22String + "," +
+                                        field23String + "," +
+                                        field24String + "," +
+                                        field25String + "," +
+                                        field26String + "," +
+                                        field27String + "," +
+                                        field28String + "," +
+                                        field29String + "," +
+                                        field30String + "," +
+                                        field31String + "," +
+                                        field32String + "," +
+                                        field33String + "," +
+                                        field34String + "," +
+                                        field35String + "," +
+                                        field36String + "," +
+                                        field37String + "," +
+                                        field39String + "," +
+                                        field40String + "," +
+                                        field41String + "," +
+                                        field42String + "," +
+                                        field43String + "," +
+                                        field44String + "," +
+                                        field45String + "," +
+                                        field46String + ",";
+
+                        AllfieldsArray.add(allFieldString);*/
+
+                                                countYet = countYet + 1;
+
+
+
+                                                String fieldNamesInsertInto = fieldNames[0];
+
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldNamesInsertInto = fieldNamesInsertInto + "," + fieldNames[counter];
+
+                                                }
+
+                                                String fieldDataInsertInto = "'" + fieldStrings[0] + "'";
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldDataInsertInto =  fieldDataInsertInto + " ,'" + fieldStrings[counter] + "'";
+
+                                                }
+
+
+                                                sqLiteDatabase.execSQL("INSERT INTO " + tableName + " (" + fieldNamesInsertInto + ") VALUES (" + fieldDataInsertInto + ")");
+
+
+
+
+                                                Toast.makeText(context, "Sync " + String.valueOf(countYet * 100 / dataCount) + "% Completed", Toast.LENGTH_SHORT).show();
+
+                                        }
+
+
+                                }
+
+                                isGetWholeTableToArrayList=0;
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                });
+
+
+
+        }
+
+        public void getFileredTableToNewSQLite(final String[] fieldNames, String searchKeyword, String inFieldName, final Context context) {
+
+
+
+                isGetWholeTableToArrayList =1;
+                countYet=0;
+
+
+                sqLiteDatabase = context.openOrCreateDatabase(tableName,MODE_PRIVATE,null);
+
+                String fieldV = "";
+
+                fieldV ="" + fieldNames[0]+ " Varchar";
+
+                for (int counter=1;counter<fieldNames.length;counter++){
+
+                        fieldV = fieldV + ", " + fieldNames[counter] + " Varchar";
+
+                }
+
+                sqLiteDatabase.execSQL("DROP TABLE "+ tableName);
+
+                sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " (" +
+                        fieldV
+                        + ")");
+
+
+                firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);
+                Query firebaseFilteredRef = firebaseRef.child(inFieldName).equalTo(searchKeyword);
+
+
+
+                AllfieldsArray = new ArrayList<>();
+
+
+                firebaseFilteredRef.addValueEventListener(new ValueEventListener() {
+
+                        String allFieldString;
+
+
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                if(isGetWholeTableToArrayList==1) {
+
+                                        dataCount = dataSnapshot.getChildrenCount();
+
+                                        String[] fieldStrings = new String[45];
+
+
+                                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                MyFirebaseManager.EntryClass mEntryClass = ds.getValue(MyFirebaseManager.EntryClass.class);
+                                                //Start Here
+
+
+                                                fieldStrings[0] = mEntryClass.getField1Data();
+                                                fieldStrings[1] = mEntryClass.getField2Data();
+                                                fieldStrings[2] = mEntryClass.getField3Data();
+                                                fieldStrings[3] = mEntryClass.getField4Data();
+                                                fieldStrings[4] = mEntryClass.getField5Data();
+                                                fieldStrings[5] = mEntryClass.getField6Data();
+                                                fieldStrings[6] = mEntryClass.getField7Data();
+                                                fieldStrings[7] = mEntryClass.getField8Data();
+                                                fieldStrings[8] = mEntryClass.getField9Data();
+                                                fieldStrings[9] = mEntryClass.getField10Data();
+                                                fieldStrings[10] = mEntryClass.getField11Data();
+                                                fieldStrings[11] = mEntryClass.getField12Data();
+                                                fieldStrings[12] = mEntryClass.getField13Data();
+                                                fieldStrings[13] = mEntryClass.getField14Data();
+                                                fieldStrings[14] = mEntryClass.getField15Data();
+                                                fieldStrings[15] = mEntryClass.getField16Data();
+                                                fieldStrings[16] = mEntryClass.getField17Data();
+                                                fieldStrings[17] = mEntryClass.getField18Data();
+                                                fieldStrings[18] = mEntryClass.getField19Data();
+                                                fieldStrings[19] = mEntryClass.getField20Data();
+                                                fieldStrings[20] = mEntryClass.getField21Data();
+                                                fieldStrings[21] = mEntryClass.getField22Data();
+                                                fieldStrings[22] = mEntryClass.getField23Data();
+                                                fieldStrings[23] = mEntryClass.getField24Data();
+                                                fieldStrings[24] = mEntryClass.getField25Data();
+                                                fieldStrings[25] = mEntryClass.getField26Data();
+                                                fieldStrings[26] = mEntryClass.getField27Data();
+                                                fieldStrings[27] = mEntryClass.getField28Data();
+                                                fieldStrings[28] = mEntryClass.getField29Data();
+                                                fieldStrings[29] = mEntryClass.getField30Data();
+                                                fieldStrings[30] = mEntryClass.getField31Data();
+                                                fieldStrings[31] = mEntryClass.getField32Data();
+                                                fieldStrings[32] = mEntryClass.getField33Data();
+                                                fieldStrings[33] = mEntryClass.getField34Data();
+                                                fieldStrings[34] = mEntryClass.getField35Data();
+                                                fieldStrings[35] = mEntryClass.getField36Data();
+                                                fieldStrings[36] = mEntryClass.getField37Data();
+                                                fieldStrings[37] = mEntryClass.getField39Data();
+                                                fieldStrings[38] = mEntryClass.getField40Data();
+                                                fieldStrings[39] = mEntryClass.getField41Data();
+                                                fieldStrings[40] = mEntryClass.getField42Data();
+                                                fieldStrings[41] = mEntryClass.getField43Data();
+                                                fieldStrings[42] = mEntryClass.getField44Data();
+                                                fieldStrings[43] = mEntryClass.getField45Data();
+                                                fieldStrings[44] = mEntryClass.getField46Data();
+
+                       /* allFieldString =
+
+                                field1String + "," +
+                                        field2String + "," +
+                                        field3String + "," +
+                                        field4String + "," +
+                                        field5String + "," +
+                                        field6String + "," +
+                                        field7String + "," +
+                                        field8String + "," +
+                                        field9String + "," +
+                                        field10String + "," +
+                                        field11String + "," +
+                                        field12String + "," +
+                                        field13String + "," +
+                                        field14String + "," +
+                                        field15String + "," +
+                                        field16String + "," +
+                                        field17String + "," +
+                                        field18String + "," +
+                                        field19String + "," +
+                                        field20String + "," +
+                                        field21String + "," +
+                                        field22String + "," +
+                                        field23String + "," +
+                                        field24String + "," +
+                                        field25String + "," +
+                                        field26String + "," +
+                                        field27String + "," +
+                                        field28String + "," +
+                                        field29String + "," +
+                                        field30String + "," +
+                                        field31String + "," +
+                                        field32String + "," +
+                                        field33String + "," +
+                                        field34String + "," +
+                                        field35String + "," +
+                                        field36String + "," +
+                                        field37String + "," +
+                                        field39String + "," +
+                                        field40String + "," +
+                                        field41String + "," +
+                                        field42String + "," +
+                                        field43String + "," +
+                                        field44String + "," +
+                                        field45String + "," +
+                                        field46String + ",";
+
+                        AllfieldsArray.add(allFieldString);*/
+
+                                                countYet = countYet + 1;
+
+
+
+                                                String fieldNamesInsertInto = fieldNames[0];
+
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldNamesInsertInto = fieldNamesInsertInto + "," + fieldNames[counter];
+
+                                                }
+
+                                                String fieldDataInsertInto = "'" + fieldStrings[0] + "'";
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldDataInsertInto =  fieldDataInsertInto + " ,'" + fieldStrings[counter] + "'";
+
+                                                }
+
+
+                                                sqLiteDatabase.execSQL("INSERT INTO " + tableName + " (" + fieldNamesInsertInto + ") VALUES (" + fieldDataInsertInto + ")");
+
+
+
+                                                Toast.makeText(context, "Sync " + String.valueOf(countYet * 100 / dataCount) + "% Completed", Toast.LENGTH_SHORT).show();
+
+                                        }
+
+
+                                }
+
+                                isGetWholeTableToArrayList=0;
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                });
+
+
+
+        }
+
+        public void getWholeTableToExistingSQLite(final String[] fieldNames, final Context context) {
+
+
+
+                isGetWholeTableToArrayList =1;
+                countYet=0;
+
+
+                sqLiteDatabase = context.openOrCreateDatabase(tableName,MODE_PRIVATE,null);
+
+                String fieldV = "";
+
+                fieldV ="" + fieldNames[0]+ " Varchar";
+
+                for (int counter=1;counter<fieldNames.length;counter++){
+
+                        fieldV = fieldV + ", " + fieldNames[counter] + " Varchar";
+
+                }
+
+                //sqLiteDatabase.execSQL("DROP TABLE "+ tableName);
+
+
+
+                sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " (" +
+                        fieldV
+                        + ")");
+
+
+                firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);
+
+
+
+                AllfieldsArray = new ArrayList<>();
+
+
+                firebaseRef.addValueEventListener(new ValueEventListener() {
+
+                        String allFieldString;
+
+
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                if(isGetWholeTableToArrayList==1) {
+
+                                        dataCount = dataSnapshot.getChildrenCount();
+
+                                        String[] fieldStrings = new String[45];
+
+
+                                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                MyFirebaseManager.EntryClass mEntryClass = ds.getValue(MyFirebaseManager.EntryClass.class);
+                                                //Start Here
+
+
+                                                fieldStrings[0] = mEntryClass.getField1Data();
+                                                fieldStrings[1] = mEntryClass.getField2Data();
+                                                fieldStrings[2] = mEntryClass.getField3Data();
+                                                fieldStrings[3] = mEntryClass.getField4Data();
+                                                fieldStrings[4] = mEntryClass.getField5Data();
+                                                fieldStrings[5] = mEntryClass.getField6Data();
+                                                fieldStrings[6] = mEntryClass.getField7Data();
+                                                fieldStrings[7] = mEntryClass.getField8Data();
+                                                fieldStrings[8] = mEntryClass.getField9Data();
+                                                fieldStrings[9] = mEntryClass.getField10Data();
+                                                fieldStrings[10] = mEntryClass.getField11Data();
+                                                fieldStrings[11] = mEntryClass.getField12Data();
+                                                fieldStrings[12] = mEntryClass.getField13Data();
+                                                fieldStrings[13] = mEntryClass.getField14Data();
+                                                fieldStrings[14] = mEntryClass.getField15Data();
+                                                fieldStrings[15] = mEntryClass.getField16Data();
+                                                fieldStrings[16] = mEntryClass.getField17Data();
+                                                fieldStrings[17] = mEntryClass.getField18Data();
+                                                fieldStrings[18] = mEntryClass.getField19Data();
+                                                fieldStrings[19] = mEntryClass.getField20Data();
+                                                fieldStrings[20] = mEntryClass.getField21Data();
+                                                fieldStrings[21] = mEntryClass.getField22Data();
+                                                fieldStrings[22] = mEntryClass.getField23Data();
+                                                fieldStrings[23] = mEntryClass.getField24Data();
+                                                fieldStrings[24] = mEntryClass.getField25Data();
+                                                fieldStrings[25] = mEntryClass.getField26Data();
+                                                fieldStrings[26] = mEntryClass.getField27Data();
+                                                fieldStrings[27] = mEntryClass.getField28Data();
+                                                fieldStrings[28] = mEntryClass.getField29Data();
+                                                fieldStrings[29] = mEntryClass.getField30Data();
+                                                fieldStrings[30] = mEntryClass.getField31Data();
+                                                fieldStrings[31] = mEntryClass.getField32Data();
+                                                fieldStrings[32] = mEntryClass.getField33Data();
+                                                fieldStrings[33] = mEntryClass.getField34Data();
+                                                fieldStrings[34] = mEntryClass.getField35Data();
+                                                fieldStrings[35] = mEntryClass.getField36Data();
+                                                fieldStrings[36] = mEntryClass.getField37Data();
+                                                fieldStrings[37] = mEntryClass.getField39Data();
+                                                fieldStrings[38] = mEntryClass.getField40Data();
+                                                fieldStrings[39] = mEntryClass.getField41Data();
+                                                fieldStrings[40] = mEntryClass.getField42Data();
+                                                fieldStrings[41] = mEntryClass.getField43Data();
+                                                fieldStrings[42] = mEntryClass.getField44Data();
+                                                fieldStrings[43] = mEntryClass.getField45Data();
+                                                fieldStrings[44] = mEntryClass.getField46Data();
+
+                       /* allFieldString =
+
+                                field1String + "," +
+                                        field2String + "," +
+                                        field3String + "," +
+                                        field4String + "," +
+                                        field5String + "," +
+                                        field6String + "," +
+                                        field7String + "," +
+                                        field8String + "," +
+                                        field9String + "," +
+                                        field10String + "," +
+                                        field11String + "," +
+                                        field12String + "," +
+                                        field13String + "," +
+                                        field14String + "," +
+                                        field15String + "," +
+                                        field16String + "," +
+                                        field17String + "," +
+                                        field18String + "," +
+                                        field19String + "," +
+                                        field20String + "," +
+                                        field21String + "," +
+                                        field22String + "," +
+                                        field23String + "," +
+                                        field24String + "," +
+                                        field25String + "," +
+                                        field26String + "," +
+                                        field27String + "," +
+                                        field28String + "," +
+                                        field29String + "," +
+                                        field30String + "," +
+                                        field31String + "," +
+                                        field32String + "," +
+                                        field33String + "," +
+                                        field34String + "," +
+                                        field35String + "," +
+                                        field36String + "," +
+                                        field37String + "," +
+                                        field39String + "," +
+                                        field40String + "," +
+                                        field41String + "," +
+                                        field42String + "," +
+                                        field43String + "," +
+                                        field44String + "," +
+                                        field45String + "," +
+                                        field46String + ",";
+
+                        AllfieldsArray.add(allFieldString);*/
+
+                                                countYet = countYet + 1;
+
+
+
+                                                String fieldNamesInsertInto = fieldNames[0];
+
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldNamesInsertInto = fieldNamesInsertInto + "," + fieldNames[counter];
+
+                                                }
+
+                                                String fieldDataInsertInto = "'" + fieldStrings[0] + "'";
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldDataInsertInto =  fieldDataInsertInto + " ,'" + fieldStrings[counter] + "'";
+
+                                                }
+
+                                                Cursor mCursor = sqLiteDatabase.rawQuery("Select "+fieldNames[0]+" from "+ tableName+" where "+fieldNames[0]+" = '" + fieldStrings[0]+"'",null);
+
+                                                if (mCursor.getCount()>=1){}else {
+
+                                                        sqLiteDatabase.execSQL("INSERT INTO " + tableName + " (" + fieldNamesInsertInto + ") VALUES (" + fieldDataInsertInto + ")");
+
+
+
+                                                        Toast.makeText(context, "Sync " + String.valueOf(countYet * 100 / dataCount) + "% Completed", Toast.LENGTH_SHORT).show();
+
+                                                }
+
+
+
+
+                                        }
+
+
+                                }
+
+                                isGetWholeTableToArrayList=0;
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                });
+
+
+
+        }
+
+        public void getFileredTableToExistingSQLite(final String[] fieldNames, String searchKeyword, String inFieldName, final Context context) {
+
+
+
+                isGetWholeTableToArrayList =1;
+                countYet=0;
+
+
+                sqLiteDatabase = context.openOrCreateDatabase(tableName,MODE_PRIVATE,null);
+
+                String fieldV = "";
+
+                fieldV ="" + fieldNames[0]+ " Varchar";
+
+                for (int counter=1;counter<fieldNames.length;counter++){
+
+                        fieldV = fieldV + ", " + fieldNames[counter] + " Varchar";
+
+                }
+
+                //sqLiteDatabase.execSQL("DROP TABLE "+ tableName);
+
+
+
+                sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " (" +
+                        fieldV
+                        + ")");
+
+
+                firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);
+                Query firebaseFilteredRef = firebaseRef.child(inFieldName).equalTo(searchKeyword);
+
+
+
+                AllfieldsArray = new ArrayList<>();
+
+
+                firebaseFilteredRef.addValueEventListener(new ValueEventListener() {
+
+                        String allFieldString;
+
+
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                if(isGetWholeTableToArrayList==1) {
+
+                                        dataCount = dataSnapshot.getChildrenCount();
+
+                                        String[] fieldStrings = new String[45];
+
+
+                                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                MyFirebaseManager.EntryClass mEntryClass = ds.getValue(MyFirebaseManager.EntryClass.class);
+                                                //Start Here
+
+
+                                                fieldStrings[0] = mEntryClass.getField1Data();
+                                                fieldStrings[1] = mEntryClass.getField2Data();
+                                                fieldStrings[2] = mEntryClass.getField3Data();
+                                                fieldStrings[3] = mEntryClass.getField4Data();
+                                                fieldStrings[4] = mEntryClass.getField5Data();
+                                                fieldStrings[5] = mEntryClass.getField6Data();
+                                                fieldStrings[6] = mEntryClass.getField7Data();
+                                                fieldStrings[7] = mEntryClass.getField8Data();
+                                                fieldStrings[8] = mEntryClass.getField9Data();
+                                                fieldStrings[9] = mEntryClass.getField10Data();
+                                                fieldStrings[10] = mEntryClass.getField11Data();
+                                                fieldStrings[11] = mEntryClass.getField12Data();
+                                                fieldStrings[12] = mEntryClass.getField13Data();
+                                                fieldStrings[13] = mEntryClass.getField14Data();
+                                                fieldStrings[14] = mEntryClass.getField15Data();
+                                                fieldStrings[15] = mEntryClass.getField16Data();
+                                                fieldStrings[16] = mEntryClass.getField17Data();
+                                                fieldStrings[17] = mEntryClass.getField18Data();
+                                                fieldStrings[18] = mEntryClass.getField19Data();
+                                                fieldStrings[19] = mEntryClass.getField20Data();
+                                                fieldStrings[20] = mEntryClass.getField21Data();
+                                                fieldStrings[21] = mEntryClass.getField22Data();
+                                                fieldStrings[22] = mEntryClass.getField23Data();
+                                                fieldStrings[23] = mEntryClass.getField24Data();
+                                                fieldStrings[24] = mEntryClass.getField25Data();
+                                                fieldStrings[25] = mEntryClass.getField26Data();
+                                                fieldStrings[26] = mEntryClass.getField27Data();
+                                                fieldStrings[27] = mEntryClass.getField28Data();
+                                                fieldStrings[28] = mEntryClass.getField29Data();
+                                                fieldStrings[29] = mEntryClass.getField30Data();
+                                                fieldStrings[30] = mEntryClass.getField31Data();
+                                                fieldStrings[31] = mEntryClass.getField32Data();
+                                                fieldStrings[32] = mEntryClass.getField33Data();
+                                                fieldStrings[33] = mEntryClass.getField34Data();
+                                                fieldStrings[34] = mEntryClass.getField35Data();
+                                                fieldStrings[35] = mEntryClass.getField36Data();
+                                                fieldStrings[36] = mEntryClass.getField37Data();
+                                                fieldStrings[37] = mEntryClass.getField39Data();
+                                                fieldStrings[38] = mEntryClass.getField40Data();
+                                                fieldStrings[39] = mEntryClass.getField41Data();
+                                                fieldStrings[40] = mEntryClass.getField42Data();
+                                                fieldStrings[41] = mEntryClass.getField43Data();
+                                                fieldStrings[42] = mEntryClass.getField44Data();
+                                                fieldStrings[43] = mEntryClass.getField45Data();
+                                                fieldStrings[44] = mEntryClass.getField46Data();
+
+                       /* allFieldString =
+
+                                field1String + "," +
+                                        field2String + "," +
+                                        field3String + "," +
+                                        field4String + "," +
+                                        field5String + "," +
+                                        field6String + "," +
+                                        field7String + "," +
+                                        field8String + "," +
+                                        field9String + "," +
+                                        field10String + "," +
+                                        field11String + "," +
+                                        field12String + "," +
+                                        field13String + "," +
+                                        field14String + "," +
+                                        field15String + "," +
+                                        field16String + "," +
+                                        field17String + "," +
+                                        field18String + "," +
+                                        field19String + "," +
+                                        field20String + "," +
+                                        field21String + "," +
+                                        field22String + "," +
+                                        field23String + "," +
+                                        field24String + "," +
+                                        field25String + "," +
+                                        field26String + "," +
+                                        field27String + "," +
+                                        field28String + "," +
+                                        field29String + "," +
+                                        field30String + "," +
+                                        field31String + "," +
+                                        field32String + "," +
+                                        field33String + "," +
+                                        field34String + "," +
+                                        field35String + "," +
+                                        field36String + "," +
+                                        field37String + "," +
+                                        field39String + "," +
+                                        field40String + "," +
+                                        field41String + "," +
+                                        field42String + "," +
+                                        field43String + "," +
+                                        field44String + "," +
+                                        field45String + "," +
+                                        field46String + ",";
+
+                        AllfieldsArray.add(allFieldString);*/
+
+                                                countYet = countYet + 1;
+
+
+
+                                                String fieldNamesInsertInto = fieldNames[0];
+
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldNamesInsertInto = fieldNamesInsertInto + "," + fieldNames[counter];
+
+                                                }
+
+                                                String fieldDataInsertInto = "'" + fieldStrings[0] + "'";
+
+                                                for(int counter=1;counter<fieldNames.length;counter++){
+
+                                                        fieldDataInsertInto =  fieldDataInsertInto + " ,'" + fieldStrings[counter] + "'";
+
+                                                }
+
+                                                Cursor mCursor = sqLiteDatabase.rawQuery("Select "+fieldNames[0]+" from "+ tableName+" where "+fieldNames[0]+" = '" + fieldStrings[0]+"'",null);
+
+                                                if (mCursor.getCount()>=1){}else {
+
+                                                        sqLiteDatabase.execSQL("INSERT INTO " + tableName + " (" + fieldNamesInsertInto + ") VALUES (" + fieldDataInsertInto + ")");
+
+
+
+                                                        Toast.makeText(context, "Sync " + String.valueOf(countYet * 100 / dataCount) + "% Completed", Toast.LENGTH_SHORT).show();
+
+                                                }
+
+
+
+
+                                        }
+
+
+                                }
+
+                                isGetWholeTableToArrayList=0;
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                });
+
+
+
+        }
+
+
+        public void uploadVideoFile(){
+
+            /*File fileDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File fileToGet = new File(fileDirectory, "shanfashion/"+mCounter + ".jpg");
+
+            StorageReference productsFileRef = FirebaseStorage.getInstance().getReference("fstore ("+mCounter + ").jpg");
+            final UploadTask uploadTask = productsFileRef.putFile(Uri.fromFile(fileToGet));
+
+
+            try {
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        StorageMetadata metadata = new StorageMetadata.Builder()
+                                .setContentType("image/jpg")
+                                .build();
+
+
+                    }
+                });
+
+            }catch (Exception e){}*/
+
+
+
+        }
+
+
+
+
+
+    public void getVideoFileToFirebaseStorage(Uri targetUri, String fileName, final Context context){
+
+        String tURI = targetUri.toString();
+
+        final String extension = tURI.substring(tURI.lastIndexOf("."));
+        StorageReference mountainImagesRef = FirebaseStorage.getInstance().getReference(fileName);
+        final UploadTask uploadTask = mountainImagesRef.putFile(targetUri);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Toast.makeText(context, "File Failed to Upload", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                StorageMetadata metadata = new StorageMetadata.Builder()
+                        .setContentType("video/flv")
+                        .build();
+                    Toast.makeText(context, "File Successfully Uploaded", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
+
+    public void getImageFileToFirebaseStorage(Uri targetUri, String fileName, final Context context){
+
+        String tURI = targetUri.toString();
+
+
+        StorageReference mountainImagesRef = FirebaseStorage.getInstance().getReference(fileName);
+        final UploadTask uploadTask = mountainImagesRef.putFile(targetUri);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                StorageMetadata metadata = new StorageMetadata.Builder()
+                        .setContentType("image/jpg")
+                        .build();
+
+                    Toast.makeText(context, "File Successfully Uploaded", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
+
+}
+
